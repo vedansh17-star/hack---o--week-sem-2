@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedansh Kumar Dwivedi | Portfolio</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 50px 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        /* Section */
+        section {
+            margin-top: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 10px;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* About */
+        .about p {
+            line-height: 1.8;
+            font-size: 16px;
+            text-align: justify;
+        }
+
+        /* Skills */
+        .skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skills li {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            padding: 12px 20px;
+            margin: 10px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skills li::before {
+            content: '⚡';
+            margin-right: 8px;
+        }
+
+        .skills li:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Projects */
+        .project {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 8px solid #667eea;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .project h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .project p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Contact */
+        .contact p {
+            font-size: 16px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact p::before {
+            content: '📧';
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 32px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            section h2 {
+                font-size: 24px;
+            }
+
+            .skills ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skills li {
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <h1>Vedansh Kumar Dwivedi</h1>
+            <p>B.Tech CSE | 1st Year</p>
+            <p>Symbiosis Institue of Technology, Nagpur</p>
+        </header>
+
+        <!-- About -->
+        <section class="about">
+            <h2>About Me</h2>
+            <p>
+                I am Vedansh Kumar Dwivedi, a first-year Computer Science Engineering student at Symbiosis International University. I possess a strong passion for programming, web development, and the continuous enhancement of my technical expertise.
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section class="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>C Programming</li>
+                <li>HTML</li>
+                <li>Basic Web Development</li>
+                <li>Problem Solving</li>
+                <li>Pyhton language</li>
+                <li>Data Structures</li>
+                <li>Algorithms</li>
+            </ul>
+        </section>
+
+        <!-- Projects -->
+        <section>
+            <h2>Projects</h2>
+
+            <div class="project">
+                <h3>Small Static Websites</h3>
+                <p>
+                    Designed and developed simple static websites using HTML
+                    with structured layouts and user-friendly design.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>C Programming Practice</h3>
+                <p>
+                    Implemented basic programs in C covering loops, conditions,
+                    arrays, and functions ,also did some projects in the feild of cv and nlp using python.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact">
+            <h2>Contact</h2>
+            <p><strong>Email:</strong> vedansh170827@gmail.com</p>
+            <p><strong>Phone:</strong> 9522002396</p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 Vedansh Kumar Dwivedi</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Function to handle scroll and add fade-in class
+        function handleScroll() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (isInViewport(section)) {
+                    section.classList.add('fade-in');
+                }
+            });
+        }
+
+        // Add event listener for scroll
+        window.addEventListener('scroll', handleScroll);
+
+        // Trigger on page load for sections already in view
+        window.addEventListener('load', handleScroll);
+    </script>
+
+</body>
+</html>
+
+
+portfolio.html
