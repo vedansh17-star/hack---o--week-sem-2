@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Task Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📝 Daily Task Tracker</h1>
+            <p class="date" id="currentDate"></p>
+        </header>
+
+        <!-- Task Input Section -->
+        <section class="task-input">
+            <form id="taskForm">
+                <input type="text" id="taskInput" placeholder="Add a new task..." autocomplete="off">
+                <button type="submit" class="add-btn">Add Task</button>
+            </form>
+        </section>
+
+        <!-- Task Stats -->
+        <section class="task-stats">
+            <span id="taskCount">0 tasks</span>
+            <span id="completedCount">0 completed</span>
+        </section>
+
+        <!-- Task List -->
+        <section class="task-list">
+            <ul id="taskList">
+                <!-- Tasks will be added here dynamically -->
+            </ul>
+        </section>
+
+        <!-- Clear All Button -->
+        <section class="clear-section">
+            <button id="clearAllBtn" class="clear-btn">Clear All Tasks</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

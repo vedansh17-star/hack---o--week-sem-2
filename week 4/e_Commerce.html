@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDeal India - Second Hand Vehicles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff6b35;
+            --secondary: #1a1a2e;
+            --accent: #e94560;
+            --light: #f8f9fa;
+            --dark: #16213e;
+            --success: #28a745;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 15px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            color: #ff6b35;
+            font-size: 28px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 32px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e94560;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+
+        .btn-outline:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)),
+                        url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600') center/cover;
+            padding: 100px 50px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #ff6b35;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            border-radius: 50px;
+        }
+
+        .search-box button {
+            padding: 15px 40px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #e94560;
+        }
+
+        /* Filter Section */
+        .filters {
+            background: white;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff6b35;
+            border-color: #ff6b35;
+            color: white;
+        }
+
+        /* Products Grid */
+        .products-section {
+            padding: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            opacity: 0.8;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-featured {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .badge-verified {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-new {
+            background: #e94560;
+            color: white;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .product-price span {
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .product-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .product-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .product-location i {
+            color: #ff6b35;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-block {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-contact {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-contact:hover {
+            background: #e94560;
+        }
+
+        .btn-save {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+
+        .btn-save:hover {
+            border-color: #ff6b35;
+            color: #ff6b35;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #1a1a2e;
+            padding: 60px 50px;
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff6b35;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #16213e;
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .search-box {
+                flex-direction: column;
+                border-radius: 15px;
+            }
+
+            .search-box button {
+                width: 100%;
+            }
+
+            .filters {
+                padding: 20px;
+            }
+
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .products-section {
+                padding: 30px 20px;
+            }
+
+            .stats-section {
+                padding: 40px 20px;
+                gap: 40px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            color: #1a1a2e;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-car"></i>
+            AutoDeal India
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cars">Cars</a></li>
+                <li><a href="#bikes">Bikes</a></li>
+                <li><a href="#commercial">Commercial</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <button class="btn btn-outline" onclick="openModal('login')">Login</button>
+            <button class="btn btn-primary" onclick="openModal('register')">Post Ad</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Find Your Perfect <span>Second Hand Vehicle</span></h1>
+        <p>Best deals on pre-owned cars, bikes, and commercial vehicles across India</p>
+        <div class="search-box">
+            <input type="text" placeholder="Search for cars, bikes, scooters...">
+            <button><i class="fas fa-search"></i> Search</button>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters">
+        <button class="filter-btn active" data-category="all">
+            <i class="fas fa-th-large"></i> All Vehicles
+        </button>
+        <button class="filter-btn" data-category="car">
+            <i class="fas fa-car"></i> Cars
+        </button>
+        <button class="filter-btn" data-category="bike">
+            <i class="fas fa-motorcycle"></i> Bikes
+        </button>
+        <button class="filter-btn" data-category="scooter">
+            <i class="fas fa-bicycle"></i> Scooters
+        </button>
+        <button class="filter-btn" data-category="truck">
+            <i class="fas fa-truck"></i> Commercial
+        </button>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="section-title">
+            <h2>Featured Listings</h2>
+            <p>Browse our curated collection of quality second-hand vehicles</p>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stat-item">
+            <div class="stat-number">10,000+</div>
+            <div class="stat-label">Vehicles Listed</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">5,000+</div>
+            <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Cities Covered</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Dealer Partners</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-car"></i> AutoDeal India</h3>
+                <p>India's trusted platform for buying and selling second-hand vehicles. We make vehicle trading simple, safe, and transparent.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Sell Your Vehicle</a></li>
+                    <li><a href="#">Buy a Vehicle</a></li>
+                    <li><a href="#">Dealer Partners</a></li>
+                    <li><a href="#">Insurance</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Second Hand Cars</a></li>
+                    <li><a href="#">Used Bikes</a></li>
+                    <li><a href="#">Scooters</a></li>
+                    <li><a href="#">Trucks</a></li>
+                    <li><a href="#">Used SUVs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-envelope"></i> info@autodealindia.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</li>
+                    <li><i class="fas fa-clock"></i> Mon - Sat: 9AM - 7PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AutoDeal India. All rights reserved. | Privacy Policy | Terms & Conditions</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Login</h3>
+            <input type="text" placeholder="Mobile Number">
+            <input type="email" placeholder="Email Address">
+            <div class="modal-buttons">
+                <button class="btn btn-primary" onclick="closeModal()">Submit</button>
+                <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vehicle Data
+        const vehicles = [
+            {
+                id: 1,
+                title: "Honda City VX CVT Petrol",
+                category: "car",
+                price: 850000,
+                year: 2019,
+                km: 45000,
+                fuel: "Petrol",
+                location: "Mumbai, Maharashtra",
+                image: "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=500",
+                badge: "featured"
+            },
+            {
+                id: 2,
+                title: "Royal Enfield Classic 350",
+                category: "bike",
+                price: 125000,
+                year: 2021,
+                km: 15000,
+                fuel: "Petrol",
+                location: "Delhi, NCR",
+                image: "https://images.unsplash.com/photo-1558981806-ec527fa84c3d?w=500",
+                badge: "verified"
+            },
+            {
+                id: 3,
+                title: "Maruti Swift VXi",
+                category: "car",
+                price: 450000,
+                year: 2018,
+                km: 65000,
+                fuel: "Petrol",
+                location: "Bangalore, Karnataka",
+                image: "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=500",
+                badge: null
+            },
+            {
+                id: 4,
+                title: "TVS Jupiter ZX",
+                category: "scooter",
+                price: 55000,
+                year: 2022,
+                km: 8000,
+                fuel: "Petrol",
+                location: "Chennai, Tamil Nadu",
+                image: "https://images.unsplash.com/photo-1622185135505-2d795043906a?w=500",
+                badge: "new"
+            },
+            {
+                id: 5,
+                title: "Hyundai Creta SX",
+                category: "car",
+                price: 1250000,
+                year: 2020,
+                km: 35000,
+                fuel: "Diesel",
+                location: "Pune, Maharashtra",
+                image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500",
+                badge: "featured"
+            },
+            {
+                id: 6,
+                title: "KTM Duke 390",
+                category: "bike",
+                price: 180000,
+                year: 2021,
+                km: 12000,
+                fuel: "Petrol",
+                location: "Hyderabad, Telangana",
+                image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=500",
+                badge: "verified"
+            },
+            {
+                id: 7,
+                title: "Tata Ace Mini Truck",
+                category: "truck",
+                price: 350000,
+                year: 2019,
+                km: 55000,
+                fuel: "Diesel",
+                location: "Ahmedabad, Gujarat",
+                image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=500",
+                badge: null
+            },
+            {
+                id: 8,
+                title: "Honda Activa 6G",
+                category: "scooter",
+                price: 48000,
+                year: 2023,
+                km: 5000,
+                fuel: "Petrol",
+                location: "Kolkata, West Bengal",
+                image: "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=500",
+                badge: "new"
+            },
+            {
+                id: 9,
+                title: "Toyota Innova Crysta",
+                category: "car",
+                price: 1850000,
+                year: 2020,
+                km: 40000,
+                fuel: "Diesel",
+                location: "Chennai, Tamil Nadu",
+                image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500",
+                badge: "featured"
+            },
+            {
+                id: 10,
+                title: "Bajaj Pulsar NS200",
+                category: "bike",
+                price: 95000,
+                year: 2020,
+                km: 22000,
+                fuel: "Petrol",
+                location: "Jaipur, Rajasthan",
+                image: "https://images.unsplash.com/photo-1558981285-6f0c94958bb6?w=500",
+                badge: null
+            },
+            {
+                id: 11,
+                title: "Hero Maestro Edge",
+                category: "scooter",
+                price: 42000,
+                year: 2021,
+                km: 18000,
+                fuel: "Petrol",
+                location: "Lucknow, UP",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500",
+                badge: "verified"
+            },
+            {
+                id: 12,
+                title: "Mahindra Bolero SLX",
+                category: "car",
+                price: 650000,
+                year: 2017,
+                km: 85000,
+                fuel: "Diesel",
+                location: "Indore, MP",
+                image: "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?w=500",
+                badge: null
+            }
+        ];
+
+        // Format price in INR
+        function formatPrice(price) {
+            return '₹' + price.toLocaleString('en-IN');
+        }
+
+        // Add displayPrice to each vehicle
+        vehicles.forEach((vehicle, index) => {
+            vehicles[index] = { ...vehicle, displayPrice: formatPrice(vehicle.price) };
+        });
+
+        // Render products
+        function renderProducts(category = 'all') {
+            const grid = document.getElementById('productsGrid');
+            const filtered = category === 'all' 
+                ? vehicles 
+                : vehicles.filter(v => v.category === category);
+            
+            grid.innerHTML = filtered.map(vehicle => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${vehicle.image}" alt="${vehicle.title}">
+                        ${vehicle.badge ? `<span class="badge badge-${vehicle.badge}">${vehicle.badge === 'featured' ? 'Featured' : vehicle.badge === 'verified' ? 'Verified' : 'New'}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${vehicle.title}</h3>
+                        <div class="product-price">${vehicle.displayPrice} <span>${vehicle.year}</span></div>
+                        <div class="product-details">
+                            <span class="detail-item"><i class="fas fa-road"></i> ${vehicle.km.toLocaleString('en-IN')} km</span>
+                            <span class="detail-item"><i class="fas fa-gas-pump"></i> ${vehicle.fuel}</span>
+                        </div>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> ${vehicle.location}
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-block btn-contact" onclick="contactSeller('${vehicle.title}')">
+                                <i class="fas fa-phone"></i> Contact
+                            </button>
+                            <button class="btn-block btn-save" onclick="saveVehicle(${vehicle.id})">
+                                <i class="fas fa-heart"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderProducts(this.dataset.category);
+            });
+        });
+
+        // Contact seller
+        function contactSeller(title) {
+            alert(`Contact request sent for ${title}. Our dealer will call you shortly!`);
+        }
+
+        // Save vehicle
+        function saveVehicle(id) {
+            alert('Vehicle saved to your favorites!');
+        }
+
+        // Modal functions
+        function openModal(type) {
+            const modal = document.getElementById('authModal');
+            const title = document.getElementById('modalTitle');
+            title.textContent = type === 'login' ? 'Login to AutoDeal' : 'Post Your Ad';
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('authModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        renderProducts();
+    </script>
+</body>
+</html>
+

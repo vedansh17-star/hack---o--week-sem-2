@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Basics Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, #306998 0%, #FFD43B 100%);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            color: white;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .quiz-header p {
+            color: white;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        .quiz-body {
+            padding: 30px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #306998;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .option:hover {
+            background: #e8f4f8;
+            border-color: #306998;
+        }
+
+        .option.selected {
+            background: #306998;
+            color: white;
+            border-color: #306998;
+        }
+
+        .option.correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .option.incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .quiz-footer {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #306998;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background: #306998;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #255278;
+            transform: translateY(-2px);
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+        }
+
+        .result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result h2 {
+            color: #155724;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            color: #155724;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>🐍 Python Basics Quiz</h1>
+            <p>Test your knowledge of Python programming fundamentals!</p>
+        </div>
+        
+        <div class="quiz-body" id="quizBody">
+            <!-- Question 1 -->
+            <div class="question" data-question="1">
+                <div class="question-text">1. Which of the following is the correct way to create a variable in Python?</div>
+                <div class="options">
+                    <div class="option" data-value="a">a) int x = 5</div>
+                    <div class="option" data-value="b">b) x = 5</div>
+                    <div class="option" data-value="c">c) var x = 5</div>
+                    <div class="option" data-value="d">d) x : int = 5</div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question" data-question="2">
+                <div class="question-text">2. What is the output of: print(type([1, 2, 3]))?</div>
+                <div class="options">
+                    <div class="option" data-value="a">a) <class 'tuple'></div>
+                    <div class="option" data-value="b">b) <class 'list'></div>
+                    <div class="option" data-value="c">c) <class 'set'></div>
+                    <div class="option" data-value="d">d) <class 'dict'></div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question" data-question="3">
+                <div class="question-text">3. Which keyword is used to define a function in Python?</div>
+                <div class="options">
+                    <div class="option" data-value="a">a) function</div>
+                    <div class="option" data-value="b">b) def</div>
+                    <div class="option" data-value="c">c) func</div>
+                    <div class="option" data-value="d">d) define</div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question" data-question="4">
+                <div class="question-text">4. What will be the output of: print(10 // 3)?</div>
+                <div class="options">
+                    <div class="option" data-value="a">a) 3.33</div>
+                    <div class="option" data-value="b">b) 3</div>
+                    <div class="option" data-value="c">c) 4</div>
+                    <div class="option" data-value="d">d) 1</div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question" data-question="5">
+                <div class="question-text">5. Which of the following is NOT a valid Python data type?</div>
+                <div class="options">
+                    <div class="option" data-value="a">a) int</div>
+                    <div class="option" data-value="b">b) float</div>
+                    <div class="option" data-value="c">c) char</div>
+                    <div class="option" data-value="d">d) str</div>
+                </div>
+            </div>
+
+            <div class="result" id="result">
+                <h2>Quiz Completed! 🎉</h2>
+                <p id="scoreText"></p>
+            </div>
+        </div>
+
+        <div class="quiz-footer">
+            <div class="score-display">Score: <span id="score">0</span>/5</div>
+            <div>
+                <button class="btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                <button class="btn btn-submit" onclick="submitQuiz()">Submit Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'b',
+            2: 'b',
+            3: 'b',
+            4: 'b',
+            5: 'c'
+        };
+
+        let score = 0;
+        let answered = false;
+
+        // Add click event listeners to all options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                if (answered) return;
+
+                const questionDiv = this.closest('.question');
+                const questionNum = questionDiv.dataset.question;
+                
+                // Remove selected class from all options in this question
+                questionDiv.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+
+        function submitQuiz() {
+            if (answered) {
+                alert('You have already submitted. Please reset to try again.');
+                return;
+            }
+
+            score = 0;
+            const questions = document.querySelectorAll('.question');
+
+            questions.forEach(question => {
+                const questionNum = question.dataset.question;
+                const selectedOption = question.querySelector('.option.selected');
+                const correctAnswer = correctAnswers[questionNum];
+
+                if (selectedOption) {
+                    const selectedValue = selectedOption.dataset.value;
+                    
+                    if (selectedValue === correctAnswer) {
+                        score++;
+                        selectedOption.classList.add('correct');
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                        // Show the correct answer
+                        question.querySelector(`.option[data-value="${correctAnswer}"]`).classList.add('correct');
+                    }
+                } else {
+                    // Show correct answer if no option selected
+                    question.querySelector(`.option[data-value="${correctAnswer}"]`).classList.add('correct');
+                }
+
+                // Disable all options
+                question.querySelectorAll('.option').forEach(opt => {
+                    opt.style.pointerEvents = 'none';
+                });
+            });
+
+            document.getElementById('score').textContent = score;
+            
+            // Show result
+            const resultDiv = document.getElementById('result');
+            const scoreText = document.getElementById('scoreText');
+            
+            let message = '';
+            if (score === 5) {
+                message = 'Perfect Score! 🌟 You\'re a Python Master!';
+            } else if (score >= 3) {
+                message = `Great Job! ${score}/5 - Keep Learning!`;
+            } else {
+                message = `${score}/5 - Keep Practicing! You'll get better!`;
+            }
+            
+            scoreText.textContent = message;
+            resultDiv.classList.add('show');
+            
+            answered = true;
+        }
+
+        function resetQuiz() {
+            score = 0;
+            answered = false;
+            
+            document.getElementById('score').textContent = '0';
+            document.getElementById('result').classList.remove('show');
+            
+            document.querySelectorAll('.question').forEach(question => {
+                question.querySelectorAll('.option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                    option.style.pointerEvents = 'auto';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+

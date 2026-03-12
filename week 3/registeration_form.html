@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symbiosis Cultural Event Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registeration_form.css">
+</head>
+<body>
+
+<!-- Floating Particles -->
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<div class="container">
+    <div class="logo">
+        <img src="https://imgs.search.brave.com/4mhI9v2fqBi-JFN_AiXbkqXmexK7NnpH_S4Wblubhsw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9lZHVy/YW5rLm9yZy9hc3Nl/dHMvaW1nL3VuaS1s/b2dvcy9zeW1iaW9z/aXMtaW50ZXJuYXRp/b25hbC11bml2ZXJz/aXR5LWxvZ28ucG5n" alt="Symbiosis Institute of Technology Logo">
+    </div>
+
+    <h1>ENTHUSIA 5.0</h1>
+    <h2>Symbiosis Institute of Technology</h2>
+    <p class="subtitle">Official Cultural Event Registration Form</p>
+
+    <form>
+        <label>Participant Name</label>
+        <input type="text" placeholder="Enter your full name" required>
+
+        <label>Email ID</label>
+        <input type="email" placeholder="Enter your email" required>
+
+        <label>Mobile Number</label>
+        <input type="tel" placeholder="Enter your mobile number" required>
+
+        <label>Department / Branch</label>
+        <input type="text" placeholder="Enter your department" required>
+
+        <label>Year of Study</label>
+        <select required>
+            <option value="">-- Select Year --</option>
+            <option>First Year</option>
+            <option>Second Year</option>
+            <option>Third Year</option>
+            <option>Final Year</option>
+        </select>
+
+        <label>Cultural Event (Select One)</label>
+        <div class="radio-group">
+            <label><input type="radio" name="event" required> Dance</label>
+            <label><input type="radio" name="event"> Music</label>
+            <label><input type="radio" name="event"> Drama / Skit</label>
+            <label><input type="radio" name="event"> Singing</label>
+            <label><input type="radio" name="event"> Fashion Show</label>
+            <label><input type="radio" name="event"> Fine Arts</label>
+        </div>
+
+        <label>Participation Type</label>
+        <select required>
+            <option value="">-- Select --</option>
+            <option>Solo</option>
+            <option>Group</option>
+        </select>
+
+        <label>Brief Description (Optional)</label>
+        <textarea rows="3" placeholder="Describe your performance or role"></textarea>
+
+        <button type="submit" class="btn">Register for Cultural Event</button>
+    </form>
+
+    <p class="note">
+        Organized by Cultural Committee <br>
+        Symbiosis Institute of Technology
+    </p>
+</div>
+
+<!-- Success Message Overlay -->
+<div class="success-overlay" id="successOverlay">
+    <div class="success-content">
+        <div class="success-icon">✓</div>
+        <h2>Registration Successful!</h2>
+        <p>Welcome to ENTHUSIA 5.0</p>
+        <p class="success-details">Get ready to showcase your talent!</p>
+    </div>
+</div>
+
+<script>
+    // Form submission handling
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Add loading animation to button
+        const btn = document.querySelector('.btn');
+        const originalText = btn.textContent;
+        btn.innerHTML = '<span class="loading"></span> Registering...';
+        btn.style.pointerEvents = 'none';
+        
+        // Simulate registration delay
+        setTimeout(function() {
+            // Show success overlay
+            document.getElementById('successOverlay').classList.add('show');
+            
+            // Reset button
+            btn.innerHTML = originalText;
+            btn.style.pointerEvents = 'auto';
+            
+            // Reset form
+            document.querySelector('form').reset();
+        }, 1500);
+    });
+    
+    // Close success overlay
+    document.getElementById('successOverlay').addEventListener('click', function() {
+        this.classList.remove('show');
+    });
+    
+    // Add input animations
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(function(input, index) {
+        input.style.animationDelay = (index * 0.1) + 's';
+        input.classList.add('fade-in-up');
+    });
+    
+    // Add label float animation on focus
+    inputs.forEach(function(input) {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('focused');
+        });
+    });
+</script>
+
+</body>
+</html>
