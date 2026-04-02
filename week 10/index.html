@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Boot Camp - Join Today!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #f8fafc;
+            background-color: #0f172a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Navbar */
+        nav {
+            background: rgba(30,41,59,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #f8fafc;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #fbbf24;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #f8fafc;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+            color: #1e1b1b;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        /* Section */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #f8fafc;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        /* Features */
+        .features {
+            background: #1e293b;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        /* Curriculum */
+        .curriculum .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .accordion-header {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: #1e1b1b;
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            background: #1e293b;
+            color: #000000;
+            transition: max-height 0.3s ease;
+        }
+        .accordion-body.active {
+            max-height: 500px;
+        }
+        .accordion-body-content {
+            padding: 1.5rem;
+            color: #000000;
+        }
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+        /* CTA Form */
+        .cta-section {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-align: center;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        input, button {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        input {
+            background: rgba(255,255,255,0.9);
+        }
+        .submit-btn {
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #2563eb;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hero {
+                padding: 100px 0 60px;
+            }
+            .features-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <div class="logo">DevBootCamp</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#curriculum">Curriculum</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#cta">Enroll</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Master Web Development in 12 Weeks</h1>
+            <p>Transform into a full-stack developer with our intensive bootcamp. Live mentorship, real projects, job guarantee.</p>
+            <a href="#cta" class="cta-btn">Enroll Now - Limited Seats!</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Bootcamp?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Live Sessions</h3>
+                    <p>Daily live coding with expert instructors. No pre-recorded videos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Real Projects</h3>
+                    <p>Build 10+ portfolio projects employers love.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>1:1 Mentorship</h3>
+                    <p>Personalized code reviews and career guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Job Guarantee</h3>
+                    <p>Get hired or your money back. Lifetime access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum -->
+    <section id="curriculum">
+        <div class="container">
+            <h2 class="section-title">12-Week Curriculum</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Weeks 1-3: HTML, CSS, Responsive Design
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-content">
+                            <ul>
+                                <li>Semantic HTML5 & Accessibility</li>
+                                <li>Advanced CSS: Flexbox, Grid, Tailwind</li>
+                                <li>Mobile-First Responsive Design</li>
+                                <li>CSS Animations, Transitions, Keyframes</li>
+                                <li>Sass/SCSS Preprocessors</li>
+                                <li>Build 3 responsive projects</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Weeks 4-6: JavaScript Fundamentals
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-content">
+                            <ul>
+                                <li>JavaScript ES6+ (Arrow functions, Destructuring)</li>
+                                <li>DOM Manipulation & Event Handling</li>
+                                <li>Async JS: Promises, Async/Await, Fetch API</li>
+                                <li>LocalStorage, SessionStorage</li>
+                                <li>OOP in JS & Modules</li>
+                                <li>Build Quiz App & Weather App</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Weeks 7-9: React & Frontend Frameworks
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-content">
+                            <ul>
+                                <li>React Setup, Components, Props, State</li>
+                                <li>React Hooks (useState, useEffect, useContext)</li>
+                                <li>React Router for SPA Navigation</li>
+                                <li>Context API & Custom Hooks</li>
+                                <li>Build E-commerce Dashboard</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Weeks 10-12: Backend, Deployment, Interview Prep
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-body-content">
+                            <ul>
+                                <li>Node.js & Express Server Setup</li>
+                                <li>MongoDB/Mongoose ORM</li>
+                                <li>Authentication (JWT, bcrypt)</li>
+                                <li>Full-Stack MERN Social Media App</li>
+                                <li>Deployment: Vercel Frontend, Railway Backend</li>
+                                <li>System Design & Mock Technical Interviews</li>
+                                <li>Resume Building & Job Applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="features">
+        <div class="container">
+            <h2 class="section-title">Alumni Reviews</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Landed a $70k job in 3 months! Best investment ever."</p>
+                    <strong>- Sarah K., Frontend Dev @ TechCorp</strong>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"Mentors are industry pros. Portfolio got me interviews."</p>
+                    <strong>- Mike R., Full-Stack Developer</strong>
+                </div>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>"From zero to React expert. Job guarantee works!"</p>
+                    <strong>- Priya S., React Developer</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Form -->
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Start Your Journey?</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem;">Secure your spot now - Batch starts soon!</p>
+            <form id="enroll-form">
+                <div class="form-grid">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <button type="submit" class="submit-btn">Enroll Now & Get Free Consultation!</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DevBootCamp. All rights reserved. | <a href="#" style="color: #2563eb;">Privacy Policy</a></p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">🐦</a>
+                <a href="#">📸</a>
+                <a href="#">💼</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Accordion
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const body = header.nextElementSibling;
+                const icon = header.querySelector('span');
+                body.classList.toggle('active');
+                icon.textContent = body.classList.contains('active') ? '−' : '+';
+            });
+        });
+
+        // Form submit
+        document.getElementById('enroll-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your interest! We will contact you within 24 hours.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
