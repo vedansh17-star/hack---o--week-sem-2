@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Info Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-cloud-sun"></i> Weather Info Panel</h1>
+        <div class="weather-grid">
+            <div class="weather-card" data-city="New York">
+                <h2><i class="fas fa-cloud-sun-rain"></i> New York</h2>
+                <div class="temp">22<sup>°C</sup></div>
+                <p class="description">Partly Cloudy</p>
+                <div class="details">
+                    <span><i class="fas fa-tint"></i> 65% Humidity</span>
+                    <span><i class="fas fa-wind"></i> 10 km/h Wind</span>
+                </div>
+            </div>
+            <div class="weather-card" data-city="London">
+                <h2><i class="fas fa-cloud-rain"></i> London</h2>
+                <div class="temp">18<sup>°C</sup></div>
+                <p class="description">Light Rain</p>
+                <div class="details">
+                    <span><i class="fas fa-tint"></i> 80% Humidity</span>
+                    <span><i class="fas fa-wind"></i> 15 km/h Wind</span>
+                </div>
+            </div>
+            <div class="weather-card" data-city="Tokyo">
+                <h2><i class="fas fa-sun"></i> Tokyo</h2>
+                <div class="temp">28<sup>°C</sup></div>
+                <p class="description">Sunny</p>
+                <div class="details">
+                    <span><i class="fas fa-tint"></i> 50% Humidity</span>
+                    <span><i class="fas fa-wind"></i> 8 km/h Wind</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
